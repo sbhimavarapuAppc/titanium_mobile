@@ -24,9 +24,7 @@ import android.app.Activity;
 		TiC.PROPERTY_CANCEL,
 		TiC.PROPERTY_MESSAGE,
 		TiC.PROPERTY_TITLE,
-		TiC.PROPERTY_OK,
-		TiC.PROPERTY_POSITIONX,
-		TiC.PROPERTY_POSITIONY
+		TiC.PROPERTY_OK
 	}
 )
 public class AlertDialogProxy extends TiViewProxy

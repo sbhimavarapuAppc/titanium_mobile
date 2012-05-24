@@ -1293,16 +1293,6 @@ public class TiC
 	 * @module.api
 	 */
 	public static final String PROPERTY_POWER = "power";
-	
-	/**
-	 * @module.api
-	 */
-	public static final String PROPERTY_POSITIONX = "positionX";
-	
-	/**
-	 * @module.api
-	 */
-	public static final String PROPERTY_POSITIONY = "positionY";
 
 	/**
 	 * @module.api
