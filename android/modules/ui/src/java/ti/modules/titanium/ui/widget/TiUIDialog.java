@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
+import android.view.WindowManager;
 
 public class TiUIDialog extends TiUIView
 {
@@ -30,6 +31,9 @@ public class TiUIDialog extends TiUIView
 	private static final boolean DBG = TiConfig.LOGD;
 	private static final int BUTTON_MASK = 0x10000000;
 
+	private String propX = null;
+	private String propY = null;
+	
 	protected Builder builder;
 	protected AlertDialog dialog;
 	protected TiUIView view;
@@ -77,6 +81,12 @@ public class TiUIDialog extends TiUIView
 	public void processProperties(KrollDict d)
 	{
 		String[] buttonText = null;
+		if(d.containsKey(TiC.PROPERTY_POSITIONX)) {
+			propX = d.getString(TiC.PROPERTY_POSITIONX);
+		}
+		if(d.containsKey(TiC.PROPERTY_POSITIONY)) {
+			propY = d.getString(TiC.PROPERTY_POSITIONY);
+		}
 		if (d.containsKey(TiC.PROPERTY_TITLE)) {
 			getBuilder().setTitle(d.getString(TiC.PROPERTY_TITLE));
 		}
@@ -224,7 +234,12 @@ public class TiUIDialog extends TiUIView
 			} else {
 				proxy.setProperty(TiC.PROPERTY_ANDROID_VIEW, null, false);
 			}
-		} else {
+		} else if (key.equals(TiC.PROPERTY_POSITIONX)) {
+			propX = (String) newValue;
+		} else if (key.equals(TiC.PROPERTY_POSITIONY)) {
+			propY = (String) newValue;
+		} 
+		else {
 			super.propertyChanged(key, oldValue, newValue, proxy);
 		}
 	}
@@ -245,11 +260,23 @@ public class TiUIDialog extends TiUIView
 				}
 			});
 			dialog = getBuilder().create();
+			if(propX != null && propY != null) {
+				WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
+				WMLP.x = Integer.parseInt(propX);   //x position
+				WMLP.y = Integer.parseInt(propY);   //y position
+				dialog.getWindow().setAttributes(WMLP);
+			}
 			builder = null;
 		}
 		try {
 			Activity dialogActivity = ownerActivity.get();
 			if (dialogActivity != null && !dialogActivity.isFinishing()) {
+				if(propX != null && propY != null) {
+					WindowManager.LayoutParams WMLP = dialog.getWindow().getAttributes();
+					WMLP.x = Integer.parseInt(propX);   //x position
+					WMLP.y = Integer.parseInt(propY);   //y position
+					dialog.getWindow().setAttributes(WMLP);
+				}
 				dialog.show();
 			} else {
 				dialog = null;

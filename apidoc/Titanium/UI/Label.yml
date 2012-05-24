@@ -72,7 +72,17 @@ properties:
         Enables font scaling to fit and forces the label content to be limited to a single line.
     type: Number
     platforms: [iphone, ipad]
-    
+
+  - name: lineBreakMode
+    summary: The technique used for wrapping and truncating the text of label.
+    description: |
+        Used to wrap the text in a label.
+        Could have one of the five values namely wordWrap, characterWrap, clip, headTruncation and middleTruncation.
+        For label objects, this property is set to tailTruncation by default.
+        This property is in effect both during normal drawing and in cases where the font size must be reduced to fit the text in its bounding box. 
+    platforms: [iphone, ipad]
+    type: String
+
   - name: shadowColor
     summary: Text shadow color, as a color name or hex triplet.
     description: |

@@ -18,7 +18,8 @@ import android.app.Activity;
 @Kroll.proxy(propertyAccessors={
 	"title", "titleid", "message",
 	"buttonNames", "androidView",
-	"options", "selectedIndex", "cancel"
+	"options", "selectedIndex", "cancel",
+	"positionX", "positionY"
 }, parentModule=UIModule.class)
 public abstract class TiDialogProxy extends TiViewProxy
 {
